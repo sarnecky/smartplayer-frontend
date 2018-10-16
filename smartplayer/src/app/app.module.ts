@@ -17,8 +17,18 @@ import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {KeysPipe} from "./classes/map-to-iterable";
+import { DashboardComponent } from "./dashboard/dashboard.component";
+import { SiteLayoutComponent } from "./layout/site-layout/site-layout.component";
+import { SiteHeaderComponent } from "./layout/site-header/site-header.component";
 
 const appRoutes: Routes = [
+  {
+    path:'',
+    component: SiteLayoutComponent,
+    children: [
+      { path: 'dashboard', component: DashboardComponent }
+    ]
+  },
   { path: 'welcome', component: WelcomeComponent },
   { path: '', redirectTo: '/select-game', pathMatch: 'full', canActivate: [AuthGuardService] },
   { path: '', redirectTo: '/welcome', pathMatch: 'full'},
@@ -35,6 +45,9 @@ const appRoutes: Routes = [
     WelcomeComponent,
     NavbarComponent,
     PageNotFoundComponent,
+    DashboardComponent,
+    SiteLayoutComponent,
+    SiteHeaderComponent
   ],
   imports: [
     BrowserModule,
