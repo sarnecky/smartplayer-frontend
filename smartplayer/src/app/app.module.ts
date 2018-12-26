@@ -20,6 +20,10 @@ import {KeysPipe} from "./classes/map-to-iterable";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { SiteLayoutComponent } from "./layout/site-layout/site-layout.component";
 import { SiteHeaderComponent } from "./layout/site-header/site-header.component";
+import { PlayerComponent } from "./player/player.component";
+import { PitchComponent } from "./pitch/pitch.component";
+import { GameComponent } from "./gameStatistics/game.component";
+import { PositionMapComponent } from "./gameStatistics/positionMap/positionMap.component";
 
 const appRoutes: Routes = [
   {
@@ -27,6 +31,13 @@ const appRoutes: Routes = [
     component: SiteLayoutComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent }
+    ]
+  },
+  {
+    path:'',
+    component: SiteLayoutComponent,
+    children: [
+      { path: 'game/:gameId', component: GameComponent }
     ]
   },
   { path: 'welcome', component: WelcomeComponent },
@@ -47,7 +58,11 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     DashboardComponent,
     SiteLayoutComponent,
-    SiteHeaderComponent
+    SiteHeaderComponent,
+    GameComponent,
+    PlayerComponent,
+    PitchComponent,
+    PositionMapComponent
   ],
   imports: [
     BrowserModule,
