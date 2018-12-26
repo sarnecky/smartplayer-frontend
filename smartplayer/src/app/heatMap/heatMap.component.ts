@@ -1,5 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Player } from "./DTO/player";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Connection } from "../classes/connection";
+import {ActivatedRoute} from '@angular/router';
 
 declare const h337: any;
 
@@ -14,14 +17,14 @@ export class HeatMapComponent implements AfterViewInit, OnInit {
   height: number = 708;
   outsideLineXOffset: number = 43;
   outsideLineYOffset: number = 41;
-  players: Player[] = [new Player(1,"dupaaaa", "dupaaaaaa")];
+  players: Player[] = [];
   heatmap: any;
+  gameId: number;
 
   ngAfterViewInit() {
     this.heatmap = h337.create({
       container: window.document.querySelector('#heatmap')
     });
-
 
     this.heatmap.setData({
       max: 1,
@@ -31,16 +34,31 @@ export class HeatMapComponent implements AfterViewInit, OnInit {
     });
 
   }
-  
-  constructor() { }
+
+  constructor(private http: HttpClient,
+              private connection: Connection,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    //pobrac wszystko
+    this.gameId = this.route.snapshot.params['gameId'];
+    this.http
+      .get<Player[]>(this.connection.apiURL + '/api/Player/listOfPlayersForGame/'+ this.gameId)
+      .subscribe(
+        data => {
+          this.players = data;
+        },
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log('An error occurred:', err.error.message);
+          } else {
+            console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+          }
+        });
   }
 
   onClick(event, player: Player) : void
   {
-    console.log(player._id);
+    console.log(player.id);
     this.heatmap.setData({
       max: 9,
       data: [

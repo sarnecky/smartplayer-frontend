@@ -12,7 +12,7 @@
                           </thead>
                           <tbody>
                             <tr *ngFor='let player of players'>
-                              <td>{{player._firstName}} {{player.lastName}}</td>
+                              <td>{{player.firstName}} {{player.lastName}}</td>
                               <td>
                                 <button class='btn btn-outline-secondary' (click)='onClick($event, player)'><i class='fa fa-chevron-left'></i>Pokaż mapę aktywności</button>
                               </td>
