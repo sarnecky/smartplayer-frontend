@@ -24,6 +24,7 @@ import { PlayerComponent } from "./player/player.component";
 import { PitchComponent } from "./pitch/pitch.component";
 import { GameComponent } from "./gameStatistics/game.component";
 import { PositionMapComponent } from "./gameStatistics/positionMap/positionMap.component";
+import { HeatMapComponent } from "./heatMap/heatMap.component";
 
 const appRoutes: Routes = [
   {
@@ -40,12 +41,18 @@ const appRoutes: Routes = [
       { path: 'game/:gameId', component: GameComponent }
     ]
   },
+  {
+    path:'',
+    component: SiteLayoutComponent,
+    children: [
+      { path: 'heatmap/:gameId', component: HeatMapComponent }
+    ]
+  },
   { path: 'welcome', component: WelcomeComponent },
   { path: '', redirectTo: '/select-game', pathMatch: 'full', canActivate: [AuthGuardService] },
   { path: '', redirectTo: '/welcome', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent, canActivate: [AuthGuardService] }
-];
-
+]
 @NgModule({
   declarations: [
     KeysPipe,
@@ -62,7 +69,8 @@ const appRoutes: Routes = [
     GameComponent,
     PlayerComponent,
     PitchComponent,
-    PositionMapComponent
+    PositionMapComponent,
+    HeatMapComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,32 @@
+
+<div class="container">
+        <div class="row">
+          <div class="col-sm">
+                <div class='table-responsive'>
+                        <table class='table'>
+                          <thead>
+                            <tr>
+                              <th>Zawodnik</th>
+                              <th>Akcja</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor='let player of players'>
+                              <td>{{player._firstName}} {{player.lastName}}</td>
+                              <td>
+                                <button class='btn btn-outline-secondary' (click)='onClick($event, player)'><i class='fa fa-chevron-left'></i>Pokaż mapę aktywności</button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+         </div>
+          <div class="col-sm">
+                <div id="heatmap">
+                        <img src="assets/images/pitch.jpg" style="width:1056px;height:708px;">
+                </div>
+          </div>
+        </div>
+      </div>
+
+
