@@ -31,7 +31,7 @@ const appRoutes: Routes = [
     path:'',
     component: SiteLayoutComponent,
     children: [
-      { path: 'dashboard', component: DashboardComponent }
+      { path: 'dashboard/:clubId', component: DashboardComponent }
     ]
   },
   {
