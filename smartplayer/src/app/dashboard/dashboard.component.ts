@@ -5,6 +5,8 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Game } from "./DTO/game";
 import { Player } from "../heatMap/DTO/player";
 import { Team } from "./DTO/team";
+import { Field } from "./DTO/field";
+import { Module } from "./DTO/module";
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +21,9 @@ export class DashboardComponent implements OnInit {
     games: Game[] =[];
     players: Player[] = [];
     teams: Team[] = [];
-    
+    fields: Field[] = [];
+    modules: Module[] =[];
+
     clubId: number;
     ngOnInit() {
       this.clubId = this.route.snapshot.params['clubId'];
@@ -63,7 +67,52 @@ export class DashboardComponent implements OnInit {
                 } else {
                   console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
                 }
-              });
+              });    
+
+              this.http
+              .get<Field[]>(this.connection.apiURL + '/api/Field/listOfFields/'+ this.clubId)
+              .subscribe(
+                data => {
+                  this.fields = data;
+                },
+                (err: HttpErrorResponse) => {
+                  if (err.error instanceof Error) {
+                    console.log('An error occurred:', err.error.message);
+                  } else {
+                    console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+                  }
+                });   
+   
+                this.http
+                .get<Module[]>(this.connection.apiURL + '/api/Module/listOfModules/'+ this.clubId)
+                .subscribe(
+                  data => {
+                    this.modules = data;
+                  },
+                  (err: HttpErrorResponse) => {
+                    if (err.error instanceof Error) {
+                      console.log('An error occurred:', err.error.message);
+                    } else {
+                      console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+                    }
+                  });            
+    }
+
+    addGame() {
+      // this.http
+      //   .post(this.connection.apiURL + '/api/Game/createGame', this.newGame)
+      //   .subscribe(
+      //     data => {
+      //       this.getGames();
+      //     },
+      //     (err: HttpErrorResponse) => {
+      //       if (err.error instanceof Error) {
+      //         console.log('An error occurred:', err.error.message);
+      //       } else {
+      //         console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+      //       }
+      //     }
+      //   );
     }
 
 }

@@ -3,6 +3,7 @@ import { Player } from "./DTO/player";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Connection } from "../classes/connection";
 import {ActivatedRoute} from '@angular/router';
+import { Module } from "../dashboard/DTO/module";
 
 declare const h337: any;
 
@@ -20,6 +21,7 @@ export class HeatMapComponent implements AfterViewInit, OnInit {
   players: Player[] = [];
   heatmap: any;
   gameId: number;
+
 
   ngAfterViewInit() {
     this.heatmap = h337.create({
