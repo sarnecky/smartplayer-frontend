@@ -21,20 +21,20 @@ export class CheckerComponent implements AfterViewInit, OnInit {
   ngAfterViewInit(){
 
   }
-  clubId: number;
+  gameId: number;
 
   ngOnInit() {
-    this.clubId = this.route.snapshot.params['clubId'];
+    this.gameId = this.route.snapshot.params['gameId'];
   }
 
   public heatMapClick(event) : void
   {
-    this.router.navigate(['/heatmap/' + this.clubId]);
+    this.router.navigate(['/heatmap/' + this.gameId]);
   }
 
   public positionInTimeClick(event) : void
   {
-    this.router.navigate(['/positionInTime/' + this.clubId]);
+    this.router.navigate(['/positionInTime/' + this.gameId]);
   }
 
 }

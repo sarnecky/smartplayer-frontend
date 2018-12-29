@@ -20,11 +20,12 @@ export class PositionInTimeComponent implements AfterViewInit, OnInit {
   ngAfterViewInit(){
 
   }
-  clubId: number;
-  momentTime: number;
+  gameId: number;
+  minute: number;
+  second: number;
 
   ngOnInit() {
-    this.clubId = this.route.snapshot.params['clubId'];
+    this.gameId = this.route.snapshot.params['gameId'];
   }
 
 }

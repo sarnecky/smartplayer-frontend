@@ -1,11 +1,24 @@
 <div class="container">
         <div class="row">
+                <div class="col-sm-11 col-sm-offset-1 hid">
+                    <div class="row">
+                        <div class="col-sm-3 col-sm-offset-4 text-center">
+                                <br>
+                                <h3>Druzyna - Druzyna</h3>
+                                <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                         <h3>Minuta w meczu: {{minute}}</h3>
                         <p-slider [(ngModel)]="minute" [style]="{'width':'50em'}" [min]="0" [max]="90" [step]="1"></p-slider>
                 
                 </div>
             </div>
+
             <div class="row">
                     <div class="col-sm-6 col-sm-offset-3">
                             <h3>Sekunda w minucie: {{second}}</h3>
@@ -13,4 +26,15 @@
                    
                     </div>
                 </div>
+
+                <div class="row">
+                    <br>
+                </div>
+            <div class="row">
+                    <div id="heatmap">
+                            <img src="assets/images/pitch.jpg" style="width:1056px;height:708px;">
+                    </div>
+            </div>
     </div>
+
+  

@@ -54,14 +54,14 @@ const appRoutes: Routes = [
     path:'',
     component: SiteLayoutComponent,
     children: [
-      { path: 'checker/:clubId', component: CheckerComponent }
+      { path: 'checker/:gameId', component: CheckerComponent }
     ]
   },
   {
     path:'',
     component: SiteLayoutComponent,
     children: [
-      { path: 'positionInTime/:clubId', component: PositionInTimeComponent }
+      { path: 'positionInTime/:gameId', component: PositionInTimeComponent }
     ]
   },
   { path: 'welcome', component: WelcomeComponent },
