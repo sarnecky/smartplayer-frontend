@@ -27,6 +27,7 @@ import { PositionMapComponent } from "./gameStatistics/positionMap/positionMap.c
 import { HeatMapComponent } from "./heatMap/heatMap.component";
 import { CheckerComponent } from "./gamePresentationChecker/checker.component";
 import { PositionInTimeComponent } from "./positionInTime/positionInTime.component";
+import {SliderModule} from 'primeng/slider';
 const appRoutes: Routes = [
   {
     path:'',
@@ -97,7 +98,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    SliderModule
   ],
   providers: [
     Connection,

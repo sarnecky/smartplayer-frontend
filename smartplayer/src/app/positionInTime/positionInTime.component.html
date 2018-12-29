@@ -1,0 +1,16 @@
+<div class="container">
+        <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                        <h3>Minuta w meczu: {{minute}}</h3>
+                        <p-slider [(ngModel)]="minute" [style]="{'width':'50em'}" [min]="0" [max]="90" [step]="1"></p-slider>
+                
+                </div>
+            </div>
+            <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                            <h3>Sekunda w minucie: {{second}}</h3>
+                            <p-slider [(ngModel)]="second" [style]="{'width':'50em'}" [min]="1" [max]="59" [step]="1"></p-slider>
+                   
+                    </div>
+                </div>
+    </div>
