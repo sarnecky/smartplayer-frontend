@@ -26,7 +26,7 @@ import { GameComponent } from "./gameStatistics/game.component";
 import { PositionMapComponent } from "./gameStatistics/positionMap/positionMap.component";
 import { HeatMapComponent } from "./heatMap/heatMap.component";
 import { CheckerComponent } from "./gamePresentationChecker/checker.component";
-
+import { PositionInTimeComponent } from "./positionInTime/positionInTime.component";
 const appRoutes: Routes = [
   {
     path:'',
@@ -56,6 +56,13 @@ const appRoutes: Routes = [
       { path: 'checker/:clubId', component: CheckerComponent }
     ]
   },
+  {
+    path:'',
+    component: SiteLayoutComponent,
+    children: [
+      { path: 'positionInTime/:clubId', component: PositionInTimeComponent }
+    ]
+  },
   { path: 'welcome', component: WelcomeComponent },
   { path: '', redirectTo: '/select-game', pathMatch: 'full', canActivate: [AuthGuardService] },
   { path: '', redirectTo: '/welcome', pathMatch: 'full'},
@@ -79,7 +86,8 @@ const appRoutes: Routes = [
     PitchComponent,
     PositionMapComponent,
     HeatMapComponent,
-    CheckerComponent
+    CheckerComponent,
+    PositionInTimeComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +97,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     Connection,
