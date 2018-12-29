@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Connection } from "../classes/connection";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Game } from "./DTO/game";
@@ -15,9 +15,13 @@ import { Module } from "./DTO/module";
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private http: HttpClient,
+  constructor(
+    private router: Router,
+    private http: HttpClient,
     private connection: Connection,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute)
+     { }
+
     games: Game[] =[];
     players: Player[] = [];
     teams: Team[] = [];
@@ -96,6 +100,10 @@ export class DashboardComponent implements OnInit {
                       console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
                     }
                   });            
+    }
+
+    public gameClick(event, game: Game){
+      this.router.navigate(['/checker/'+game.id]);
     }
 
     addGame() {

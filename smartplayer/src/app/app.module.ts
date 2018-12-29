@@ -25,6 +25,7 @@ import { PitchComponent } from "./pitch/pitch.component";
 import { GameComponent } from "./gameStatistics/game.component";
 import { PositionMapComponent } from "./gameStatistics/positionMap/positionMap.component";
 import { HeatMapComponent } from "./heatMap/heatMap.component";
+import { CheckerComponent } from "./gamePresentationChecker/checker.component";
 
 const appRoutes: Routes = [
   {
@@ -46,6 +47,13 @@ const appRoutes: Routes = [
     component: SiteLayoutComponent,
     children: [
       { path: 'heatmap/:gameId', component: HeatMapComponent }
+    ]
+  },
+  {
+    path:'',
+    component: SiteLayoutComponent,
+    children: [
+      { path: 'checker/:clubId', component: CheckerComponent }
     ]
   },
   { path: 'welcome', component: WelcomeComponent },
@@ -70,7 +78,8 @@ const appRoutes: Routes = [
     PlayerComponent,
     PitchComponent,
     PositionMapComponent,
-    HeatMapComponent
+    HeatMapComponent,
+    CheckerComponent
   ],
   imports: [
     BrowserModule,
