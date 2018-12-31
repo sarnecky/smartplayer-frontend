@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Connection } from "../classes/connection";
 import {ActivatedRoute} from '@angular/router';
 import { Module } from "../dashboard/DTO/module";
+import { TeamPositionsDuringGame } from "./DTO/teamPositionsDuringGame";
 
 declare const h337: any;
 
@@ -14,11 +15,12 @@ declare const h337: any;
 })
 export class HeatMapComponent implements AfterViewInit, OnInit {
 
-  width: number = 1056;
-  height: number = 708;
   outsideLineXOffset: number = 43;
   outsideLineYOffset: number = 41;
-  players: Player[] = [];
+  width: number = 1056 - 2 * this.outsideLineXOffset;
+  height: number = 708 - 2 * this.outsideLineYOffset;
+  public players: Player[] = [];
+  teamPositionsDuringGame: TeamPositionsDuringGame;
   heatmap: any;
   gameId: number;
 
@@ -27,14 +29,6 @@ export class HeatMapComponent implements AfterViewInit, OnInit {
     this.heatmap = h337.create({
       container: window.document.querySelector('#heatmap')
     });
-
-    this.heatmap.setData({
-      max: 1,
-      data: [
-        {x: 500, y: 500, value: 1},
-      ]
-    });
-
   }
 
   constructor(private http: HttpClient,
@@ -56,22 +50,35 @@ export class HeatMapComponent implements AfterViewInit, OnInit {
             console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
           }
         });
+
+        this.http
+        .get<TeamPositionsDuringGame>(this.connection.apiURL + 'positions/'+ this.gameId + '/' + this.width + '/' + this.height)
+        .subscribe(
+          data => {
+            this.teamPositionsDuringGame = data;
+          },
+          (err: HttpErrorResponse) => {
+            if (err.error instanceof Error) {
+              console.log('An error occurred:', err.error.message);
+            } else {
+              console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+            }
+          });
+
   }
 
-  onClick(event, player: Player) : void
+  public onClick(event, player: Player) : void
   {
-    console.log(player.id);
-    this.heatmap.setData({
-      max: 9,
-      data: [
-        {x: 500, y: 500, value: 1},
-        {x: 500, y: 600, value: 4},
-        {x: 600, y: 700, value: 6},
-
-      ]
+    var positions = this.teamPositionsDuringGame.players.find(i=>i.playerId == player.id);
+    var data = [];
+    positions.positions.forEach(position => {
+      data.push({x: position.x, y: position.y, value: 1})
     });
-    //pobierz dane zawodnika
-    //update heatmapy
+    console.log(data);
+    this.heatmap.setData({
+      max: 15,
+      data: data
+    });
   }
 
 }

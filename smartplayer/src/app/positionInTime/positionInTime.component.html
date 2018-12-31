@@ -31,9 +31,12 @@
                     <br>
                 </div>
             <div class="row">
-                    <div id="heatmap">
-                            <img src="assets/images/pitch.jpg" style="width:1056px;height:708px;">
-                    </div>
+                <ko-stage [config]="configStage">
+                            <ko-layer>
+                              <ko-image [config]="configStage"></ko-image>
+                              <ko-circle [config]="configCircle" (click)="handleClick($event)"></ko-circle>
+                            </ko-layer>
+                          </ko-stage>
             </div>
     </div>
 

@@ -28,6 +28,7 @@ import { HeatMapComponent } from "./heatMap/heatMap.component";
 import { CheckerComponent } from "./gamePresentationChecker/checker.component";
 import { PositionInTimeComponent } from "./positionInTime/positionInTime.component";
 import {SliderModule} from 'primeng/slider';
+import { KonvaModule } from 'ng2-konva';
 const appRoutes: Routes = [
   {
     path:'',
@@ -99,7 +100,8 @@ const appRoutes: Routes = [
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     RouterModule.forRoot(appRoutes),
-    SliderModule
+    SliderModule,
+    KonvaModule
   ],
   providers: [
     Connection,
