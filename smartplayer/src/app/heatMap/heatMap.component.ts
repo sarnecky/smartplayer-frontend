@@ -52,7 +52,7 @@ export class HeatMapComponent implements AfterViewInit, OnInit {
         });
 
         this.http
-        .get<TeamPositionsDuringGame>(this.connection.apiURL + 'positions/'+ this.gameId + '/' + this.width + '/' + this.height)
+        .get<TeamPositionsDuringGame>(this.connection.apiURL + '/api/Game/positions/'+ this.gameId + '/' + this.width + '/' + this.height)
         .subscribe(
           data => {
             this.teamPositionsDuringGame = data;
@@ -76,7 +76,7 @@ export class HeatMapComponent implements AfterViewInit, OnInit {
     });
     console.log(data);
     this.heatmap.setData({
-      max: 15,
+      max: 5,
       data: data
     });
   }
