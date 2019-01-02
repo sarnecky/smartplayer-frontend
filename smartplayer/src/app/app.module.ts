@@ -27,8 +27,10 @@ import { PositionMapComponent } from "./gameStatistics/positionMap/positionMap.c
 import { HeatMapComponent } from "./heatMap/heatMap.component";
 import { CheckerComponent } from "./gamePresentationChecker/checker.component";
 import { PositionInTimeComponent } from "./positionInTime/positionInTime.component";
-import {SliderModule} from 'primeng/slider';
-import { KonvaModule } from 'ng2-konva';
+import { SliderModule } from 'primeng/slider';
+import { AddPlayerComponent } from "./addPlayer/addPlayer.component";
+///import { BrowserModule } from '@angular/platform-browser';
+
 const appRoutes: Routes = [
   {
     path:'',
@@ -65,10 +67,17 @@ const appRoutes: Routes = [
       { path: 'positionInTime/:gameId', component: PositionInTimeComponent }
     ]
   },
+  {
+    path:'',
+    component: SiteLayoutComponent,
+    children: [
+      { path: 'addPlayer', component: AddPlayerComponent }
+    ]
+  },
   { path: 'welcome', component: WelcomeComponent },
-  { path: '', redirectTo: '/select-game', pathMatch: 'full', canActivate: [AuthGuardService] },
   { path: '', redirectTo: '/welcome', pathMatch: 'full'},
-  { path: '**', component: PageNotFoundComponent, canActivate: [AuthGuardService] }
+  { path: '**', component: PageNotFoundComponent, canActivate: [AuthGuardService] },
+  
 ]
 @NgModule({
   declarations: [
@@ -89,7 +98,8 @@ const appRoutes: Routes = [
     PositionMapComponent,
     HeatMapComponent,
     CheckerComponent,
-    PositionInTimeComponent
+    PositionInTimeComponent,
+    AddPlayerComponent
   ],
   imports: [
     BrowserModule,
@@ -99,9 +109,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
-    SliderModule,
-    KonvaModule
+    RouterModule.forRoot(appRoutes, {useHash: true}),
+    SliderModule
   ],
   providers: [
     Connection,

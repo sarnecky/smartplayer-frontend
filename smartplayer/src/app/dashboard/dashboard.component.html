@@ -9,8 +9,6 @@
             <ul class="list-group list-group-flush" *ngFor='let team of teams'>
                 <li class="list-group-item" (click)='onClick($event, team)'><a>{{team.name}}</a></li>         
               </ul>
-          <p class="text-right"><a href="url">wiecej..</a></p>
-          <button type="button" class="btn btn-lg btn-block btn-primary">Dodaj drużynę</button>
         </div>
       </div>
       <div class="card shadow-sm">
@@ -19,10 +17,9 @@
         </div>
         <div class="card-body">
             <ul class="list-group list-group-flush" *ngFor='let player of players'>
-                <li class="list-group-item" (click)='onClick($event, player)'><a>{{player.firstName}} vs. {{player.lastName}}</a></li>         
+                <li class="list-group-item" (click)='onClick($event, player)'><a>{{player.firstName}} {{player.lastName}}</a></li>         
               </ul>
-          <p class="text-right"><a href="url">wiecej..</a></p>
-          <button type="button" class="btn btn-lg btn-block btn-primary">Dodaj zawodnika</button>
+          <button type="button" class="btn btn-lg btn-block btn-primary" (click)='addPlayer($event)'>Dodaj zawodnika</button>
         </div>
       </div>
       <div class="card shadow-sm">
@@ -33,8 +30,6 @@
             <ul class="list-group list-group-flush" *ngFor='let game of games'>
                 <li class="list-group-item" (click)='gameClick($event, game)'><a>{{game.host}} vs. {{game.opponent}}</a></li>         
               </ul>
-          <p class="text-right"><a href="url">wiecej..</a></p>
-          <button type="button" class="btn btn-lg btn-block btn-primary">Dodaj rozgrywkę</button>
         </div>
       </div>
       <div class="card shadow-sm">
@@ -43,9 +38,8 @@
         </div>
         <div class="card-body">
           <ul class="list-group list-group-flush" *ngFor='let field of fields'>
-            <li class="list-group-item" (click)='onClick($event, field)'><a>{{field.name}}- {{field.address}}</a></li>         
+            <li class="list-group-item" (click)='onClick($event, field)'><a>{{field.name}}</a></li>         
           </ul>
-          <p class="text-right"><a href="url">wiecej..</a></p>
           <button type="button" class="btn btn-lg btn-block btn-primary">Dodaj boisko</button>
         </div>
       </div>
@@ -57,8 +51,6 @@
           <ul class="list-group list-group-flush" *ngFor='let module of modules'>
             <li class="list-group-item" (click)='onClick($event, module)'><a>{{module.macAddress}}</a></li>         
           </ul>
-          <p class="text-right"><a href="url">wiecej..</a></p>
-          <button type="button" class="btn btn-lg btn-block btn-primary">Dodaj moduł</button>
         </div>
       </div>
     </div>

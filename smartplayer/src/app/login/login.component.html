@@ -3,7 +3,7 @@
   <div class="form-group input-top">
     <label for="email">Email</label>
     <input type="email" id="email" class="form-control" required
-           [(ngModel)]="model.email" name="email" #email="ngModel">
+           [(ngModel)]="model.Email" name="email" #email="ngModel">
     <div [hidden]="email.valid || email.untouched" class="alert alert-danger">
       Adres email jest wymagany
     </div>
@@ -12,7 +12,7 @@
   <div class="form-group">
     <label for="password">Hasło</label>
     <input type="password" id="password" class="form-control" required
-           [(ngModel)]="model.password" name="password" #password="ngModel">
+           [(ngModel)]="model.Password" name="password" #password="ngModel">
     <div [hidden]="password.valid || password.untouched" class="alert alert-danger">
       Hasło jest wymagane
     </div>

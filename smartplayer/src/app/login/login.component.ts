@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {LoginViewModel} from '../classes/account-view-models/login-view-model';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Connection} from '../classes/connection';
@@ -16,10 +16,9 @@ import {AuthService} from "../services/auth.service";
 export class LoginComponent {
 
   model = new LoginViewModel();
-
   constructor(private auth: AuthService) {  }
 
   onSubmit() {
-    this.auth.authentication(this.model, '/api/accounts/login');
+     this.auth.login(this.model, '/api/user/token');
   }
 }

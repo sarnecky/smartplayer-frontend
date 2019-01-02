@@ -106,21 +106,7 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['/checker/'+game.id]);
     }
 
-    addGame() {
-      // this.http
-      //   .post(this.connection.apiURL + '/api/Game/createGame', this.newGame)
-      //   .subscribe(
-      //     data => {
-      //       this.getGames();
-      //     },
-      //     (err: HttpErrorResponse) => {
-      //       if (err.error instanceof Error) {
-      //         console.log('An error occurred:', err.error.message);
-      //       } else {
-      //         console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
-      //       }
-      //     }
-      //   );
+    public addPlayer(event,){
+      this.router.navigate(['/addPlayer']);
     }
-
 }

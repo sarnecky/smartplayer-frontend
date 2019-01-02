@@ -19,8 +19,6 @@ export class AuthService {
       .subscribe(
         data => {
           sessionStorage.setItem('token', data['response'].token);
-          sessionStorage.setItem('expiration', data['response'].expiration);
-          sessionStorage.setItem('userName', model['email']);
           this.router.navigate(['/select-game']);
         },
         (err: HttpErrorResponse) => {
@@ -31,6 +29,30 @@ export class AuthService {
           }
         }
       );
+  }
+
+  public login(model, url: String): boolean {
+    this.http
+      .post(this.constant.apiURL + url, model)
+      .subscribe(
+        data => {
+          sessionStorage.setItem('token', data['accessToken']);
+          sessionStorage.setItem('clubId', data['clubId']);
+          sessionStorage.setItem('userName', data['userName']);
+         
+          this.router.navigate(['/dashboard/'+  data['clubId']]);
+          return true;
+        },
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log('An error occurred:', err.error.message);
+          } else {
+            console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+          }
+          
+        }
+      );
+      return false;
   }
 
   getUserName(): string {
