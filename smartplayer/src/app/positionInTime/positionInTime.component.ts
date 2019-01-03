@@ -6,6 +6,8 @@ import { Module } from "../dashboard/DTO/module";
 import { SliderModule } from 'primeng/slider';
 import { Observable } from "rxjs/Observable";
 import { of } from "rxjs/observable/of";
+import { TeamPositionsDuringGame } from "../heatMap/DTO/teamPositionsDuringGame";
+import { Player } from "../heatMap/DTO/player";
 
 // declare window to remove typescript warning
 interface Window {
@@ -28,6 +30,10 @@ export class PositionInTimeComponent implements AfterViewInit, OnInit {
   gameId: number;
   minute: number;
   second: number;
+  teamPositionsDuringGame: TeamPositionsDuringGame;
+  public players: Player[] = [];
+  width: number = 1050;
+  height: number = 680;
 
   constructor(private router: Router,
               private http: HttpClient,
@@ -40,10 +46,43 @@ export class PositionInTimeComponent implements AfterViewInit, OnInit {
     this.drawPitch()
   }
 
-  ngOnInit() {   
+  ngOnInit() {
+    this.gameId = this.route.snapshot.params['gameId'];
+    this.http
+    .get<TeamPositionsDuringGame>(this.connection.apiURL + '/api/Game/positions/'+ this.gameId + '/' + this.width + '/' + this.height)
+    .subscribe(
+      data => {
+        this.teamPositionsDuringGame = data;
+      },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('An error occurred:', err.error.message);
+        } else {
+          console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+        }
+      });   
+
+      this.http
+      .get<Player[]>(this.connection.apiURL + '/api/Player/listOfPlayersForGame/'+ this.gameId)
+      .subscribe(
+        data => {
+          this.players = data;
+        },
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log('An error occurred:', err.error.message);
+          } else {
+            console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+          }
+        });
   }
 
   public handleMinuteChange(event){
+    this.drawPitch()
+    this.drawPlayer(200, event.value)
+  }
+
+  public handleSecondChange(event){
     this.drawPitch()
     this.drawPlayer(200, event.value)
   }
