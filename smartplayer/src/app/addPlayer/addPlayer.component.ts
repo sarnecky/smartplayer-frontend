@@ -1,10 +1,7 @@
 import {Component} from '@angular/core';
 import {AddPlayerViewModel} from '../classes/rooms-view-models/add-player-view-model';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Connection} from '../classes/connection';
-import {FormControl, FormGroup} from "@angular/forms";
-import {Router} from "@angular/router";
-import {AuthService} from "../services/auth.service";
+import {Router} from '@angular/router';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-addPlayer',
@@ -24,6 +21,5 @@ export class AddPlayerComponent {
 
   onSubmit() {
     this.auth.addPlayerToDb(this.model, '/api/Player/create');
-    // this.auth.addPlayerToTeam('/api/Player/addPlayerToTeam', 7);
   }
 }

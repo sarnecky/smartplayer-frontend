@@ -29,6 +29,7 @@ import { CheckerComponent } from "./gamePresentationChecker/checker.component";
 import { PositionInTimeComponent } from "./positionInTime/positionInTime.component";
 import { SliderModule } from 'primeng/slider';
 import { AddPlayerComponent } from "./addPlayer/addPlayer.component";
+import { AddFieldComponent } from "./addField/addField.component";
 ///import { BrowserModule } from '@angular/platform-browser';
 
 const appRoutes: Routes = [
@@ -74,6 +75,13 @@ const appRoutes: Routes = [
       { path: 'addPlayer', component: AddPlayerComponent }
     ]
   },
+  {
+    path:'',
+    component: SiteLayoutComponent,
+    children: [
+      { path: 'addField', component: AddFieldComponent }
+    ]
+  },
   { path: 'welcome', component: WelcomeComponent },
   { path: '', redirectTo: '/welcome', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent, canActivate: [AuthGuardService] },
@@ -99,7 +107,8 @@ const appRoutes: Routes = [
     HeatMapComponent,
     CheckerComponent,
     PositionInTimeComponent,
-    AddPlayerComponent
+    AddPlayerComponent,
+    AddFieldComponent
   ],
   imports: [
     BrowserModule,
