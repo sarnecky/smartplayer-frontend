@@ -32,7 +32,6 @@ export class PitchComponent implements OnInit {
     this.context = this.canvas.getContext('2d');
     this.drawPitch()
     var player = new Player(this.canvas, this.context);
-   // this.context.translate(this.x,this.y);
     player.move(new Point(200, 259));
   
   }

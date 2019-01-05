@@ -106,7 +106,12 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['/checker/'+game.id]);
     }
 
-    public addPlayer(event,){
-      this.router.navigate(['/addPlayer']);
+    public addPlayer(event) {
+        sessionStorage.setItem('teamId', String(this.teams[0].id));
+        this.router.navigate(['/addPlayer']);
+    }
+
+    public addField(event) {
+      this.router.navigate(['/addField']);
     }
 }

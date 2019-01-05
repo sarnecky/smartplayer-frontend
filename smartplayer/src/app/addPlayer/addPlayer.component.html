@@ -1,49 +1,49 @@
 
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
-      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <form (ngSubmit)="onSubmit()" #addPlayerForm="ngForm">
         
           <div class="form-group input-top">
-            <label for="email">First Name</label>
-            <input type="email" id="email" class="form-control" required [(ngModel)]="model.Email" name="email" #email="ngModel">
-            <div [hidden]="email.valid || email.untouched" class="alert alert-danger">
+            <label for="firstname">Imię</label>
+            <input type="text" id="firstname" class="form-control" required [(ngModel)]="model.Firstname" name="firstname" #firstname="ngModel">
+            <div [hidden]="firstname.valid || firstname.untouched" class="alert alert-danger">
+              Pole wymagane
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="lastname">Nazwisko</label>
+            <input type="text" id="lastname" class="form-control" required [(ngModel)]="model.Lastname" name="lastname" #lastname="ngModel">
+            <div [hidden]="lastname.valid || lastname.untouched" class="alert alert-danger">
+              Pole wymagane
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="growth">Wzrost</label>
+            <input type="number" id="growth" class="form-control" required [(ngModel)]="model.Growth" name="growth" #growth="ngModel">
+            <div [hidden]="growth.valid || growth.untouched" class="alert alert-danger">
+              Pole wymagane
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="weight">Waga</label>
+            <input type="number" id="weight" class="form-control" required [(ngModel)]="model.Weight" name="weight" #weight="ngModel">
+            <div [hidden]="weight.valid || weight.untouched" class="alert alert-danger">
+              Pole wymagane
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="dateofbirth">Data urodzenia</label>
+            <input type="date" id="dateofbirth" class="form-control" required [(ngModel)]="model.DateOfBirth" name="dateofbirth" #dateofbirth="ngModel">
+            <div [hidden]="dateofbirth.valid || dateofbirth.untouched" class="alert alert-danger">
               Pole wymagane
             </div>
           </div>
         
-          <div class="form-group">
-            <label for="password">Last name</label>
-            <input type="password" id="password" class="form-control" required [(ngModel)]="model.Password" name="password" #password="ngModel">
-            <div [hidden]="password.valid || password.untouched" class="alert alert-danger">
-              Pole wymagane
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="password">Wzrost</label>
-            <input type="password" id="password" class="form-control" required [(ngModel)]="model.Password" name="password" #password="ngModel">
-            <div [hidden]="password.valid || password.untouched" class="alert alert-danger">
-              Pole wymagane
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="password">Waga</label>
-            <input type="password" id="password" class="form-control" required [(ngModel)]="model.Password" name="password" #password="ngModel">
-            <div [hidden]="password.valid || password.untouched" class="alert alert-danger">
-              Pole wymagane
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="password">Data urodzenia</label>
-            <input type="password" id="password" class="form-control" required [(ngModel)]="model.Password" name="password" #password="ngModel">
-            <div [hidden]="password.valid || password.untouched" class="alert alert-danger">
-              Pole wymagane
-            </div>
-          </div>
-        
-          <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!loginForm.form.valid">Sign in</button>
+          <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!addPlayerForm.form.valid">Dodaj</button>
           
         </form>
     </div>
