@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Router} from "@angular/router";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {Connection} from "../classes/connection";
+import {Router} from '@angular/router';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Connection} from '../classes/connection';
 
 @Injectable()
 export class AuthService {
@@ -39,8 +39,8 @@ export class AuthService {
           sessionStorage.setItem('token', data['accessToken']);
           sessionStorage.setItem('clubId', data['clubId']);
           sessionStorage.setItem('userName', data['userName']);
-         
-          this.router.navigate(['/dashboard/'+  data['clubId']]);
+
+          this.router.navigate(['/dashboard/' +  data['clubId']]);
           return true;
         },
         (err: HttpErrorResponse) => {
@@ -49,10 +49,41 @@ export class AuthService {
           } else {
             console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
           }
-          
+
         }
       );
       return false;
+  }
+
+  public addPlayerToDb(model, url: String): void {
+    this.http
+      .post(this.constant.apiURL + url, model)
+      .toPromise()
+      .then(data => this.addPlayerToTeam('/api/Player/addPlayerToTeam', data['id']));
+  }
+
+  public addPlayerToTeam(url: String, playerId: number): boolean {
+    this.http
+      .post(this.constant.apiURL + url + '/playerId=' + playerId + '&teamId=' + Number(sessionStorage.getItem('teamId')), {
+        playerId: playerId,
+        teamId: Number(sessionStorage.getItem('teamId')),
+      })
+      .subscribe(
+        data => {
+
+          this.router.navigate(['/dashboard/' + sessionStorage.getItem('clubId')]);
+          return true;
+        },
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log('An error occurred:', err.error.message);
+          } else {
+            console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+          }
+
+        }
+      );
+    return false;
   }
 
   getUserName(): string {

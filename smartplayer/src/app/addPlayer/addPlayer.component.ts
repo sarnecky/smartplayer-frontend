@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {RegisterViewModel} from '../classes/account-view-models/register-view-model';
+import {AddPlayerViewModel} from '../classes/rooms-view-models/add-player-view-model';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Connection} from '../classes/connection';
 import {FormControl, FormGroup} from "@angular/forms";
@@ -16,13 +16,14 @@ import {AuthService} from "../services/auth.service";
 
 export class AddPlayerComponent {
 
-  model = new RegisterViewModel();
+  model = new AddPlayerViewModel;
 
   constructor(private auth: AuthService,
               private router: Router) {
   }
 
   onSubmit() {
-    this.router.navigate(['/dashboard/'+sessionStorage.getItem('clubId')]);
+    this.auth.addPlayerToDb(this.model, '/api/Player/create');
+    // this.auth.addPlayerToTeam('/api/Player/addPlayerToTeam', 7);
   }
 }
