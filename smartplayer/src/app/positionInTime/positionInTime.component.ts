@@ -9,7 +9,6 @@ import { of } from "rxjs/observable/of";
 import { TeamPositionsDuringGame } from "../heatMap/DTO/teamPositionsDuringGame";
 import { Player } from "../heatMap/DTO/player";
 import {Http, Response} from "@angular/http";
-import 'rxjs/Rx';
 // declare window to remove typescript warning
 interface Window {
   Image: any;
@@ -37,7 +36,8 @@ export class PositionInTimeComponent implements AfterViewInit, OnInit {
   width: number = 1050;
   height: number = 680;
   initDate : Date;
-
+  minute: number = 0;
+  second: number = 1;
   constructor(private router: Router,
               private http: Http,
               private connection: Connection,
@@ -87,7 +87,7 @@ export class PositionInTimeComponent implements AfterViewInit, OnInit {
   public handleMinuteChange(event){
     this.currentMinute = event.value;
     this.drawPitch();
-    
+
     this.positions.players.forEach(player => {
       player.positions.forEach(position => {
         var positionDate = new Date(position.date);
