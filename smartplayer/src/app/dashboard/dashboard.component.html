@@ -38,7 +38,7 @@
         </div>
         <div class="card-body">
           <ul class="list-group list-group-flush" *ngFor='let field of fields'>
-            <li class="list-group-item" (click)='onClick($event, field)'><a>{{field.name}}</a></li>         
+            <li class="list-group-item" (click)='fieldClick($event, field)'><a>{{field.name}}</a></li>
           </ul>
           <button type="button" class="btn btn-lg btn-block btn-primary" (click)='addField($event)'>Dodaj boisko</button>
         </div>

@@ -34,6 +34,7 @@ import { AddFieldComponent } from "./addField/addField.component";
 
 import {HttpModule} from "@angular/http";
 import {ViewPlayerComponent} from "./viewPlayer/viewPlayer.component";
+import {ViewFieldComponent} from "./viewField/viewField.component";
 const appRoutes: Routes = [
   {
     path:'',
@@ -91,6 +92,13 @@ const appRoutes: Routes = [
       { path: 'viewPlayer/:playerId', component: ViewPlayerComponent }
     ]
   },
+  {
+    path:'',
+    component: SiteLayoutComponent,
+    children: [
+      { path: 'viewField/:fieldId', component: ViewFieldComponent }
+    ]
+  },
   { path: 'welcome', component: WelcomeComponent },
   { path: '', redirectTo: '/welcome', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent, canActivate: [AuthGuardService] },
@@ -118,7 +126,8 @@ const appRoutes: Routes = [
     PositionInTimeComponent,
     AddPlayerComponent,
     AddFieldComponent,
-    ViewPlayerComponent
+    ViewPlayerComponent,
+    ViewFieldComponent
   ],
   imports: [
     BrowserModule,

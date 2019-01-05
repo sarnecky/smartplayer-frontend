@@ -118,4 +118,8 @@ export class DashboardComponent implements OnInit {
   public playerClick(event, player: Player){
     this.router.navigate(['/viewPlayer/'+player.id]);
   }
+
+  public fieldClick($event, field: Field) {
+    this.router.navigate(['/viewField/'+ field.id]);
+  }
 }
