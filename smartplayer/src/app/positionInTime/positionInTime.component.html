@@ -14,24 +14,29 @@
         <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                         <h3>Minuta w meczu: {{minute}}</h3>
-                        <p-slider [(ngModel)]="minute" [style]="{'width':'50em'}" [min]="0" [max]="90" [step]="1"></p-slider>
+                        <p-slider [(ngModel)]="minute" [style]="{'width':'50em'}" [min]="0" [max]="90" [step]="1" (onChange)='handleMinuteChange($event)'></p-slider>
                 
                 </div>
-            </div>
+        </div>
 
             <div class="row">
                     <div class="col-sm-6 col-sm-offset-3">
                             <h3>Sekunda w minucie: {{second}}</h3>
-                            <p-slider [(ngModel)]="second" [style]="{'width':'50em'}" [min]="1" [max]="59" [step]="1"></p-slider>
+                            <p-slider [(ngModel)]="second" [style]="{'width':'50em'}" [min]="1" [max]="59" [step]="1"(onChange)='handleSecondChange($event)' ></p-slider>
                    
                     </div>
-                </div>
+            </div>
 
                 <div class="row">
                     <br>
                 </div>
-            <div class="row">
-            </div>
+
+                <div class="row">
+                    <div class="col-sm-6 ">
+                      <canvas #pitch width="1050" height="680"></canvas>
+                      <span id="debug"></span>
+                    </div>
+                </div>
     </div>
 
   

@@ -29,6 +29,10 @@ export class HeatMapComponent implements AfterViewInit, OnInit {
     this.heatmap = h337.create({
       container: window.document.querySelector('#heatmap')
     });
+    this.heatmap.setData({
+      max: 5,
+      data: []
+    });
   }
 
   constructor(private http: HttpClient,
@@ -72,7 +76,7 @@ export class HeatMapComponent implements AfterViewInit, OnInit {
     var positions = this.teamPositionsDuringGame.players.find(i=>i.playerId == player.id);
     var data = [];
     positions.positions.forEach(position => {
-      data.push({x: position.x, y: position.y, value: 1})
+      data.push({x: position.x+this.outsideLineXOffset, y: position.y+this.outsideLineYOffset, value: 1})
     });
     console.log(data);
     this.heatmap.setData({
