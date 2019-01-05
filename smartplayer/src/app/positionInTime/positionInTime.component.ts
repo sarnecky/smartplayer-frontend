@@ -9,6 +9,7 @@ import { of } from "rxjs/observable/of";
 import { TeamPositionsDuringGame } from "../heatMap/DTO/teamPositionsDuringGame";
 import { Player } from "../heatMap/DTO/player";
 import {Http, Response} from "@angular/http";
+import 'rxjs/Rx';
 // declare window to remove typescript warning
 interface Window {
   Image: any;
