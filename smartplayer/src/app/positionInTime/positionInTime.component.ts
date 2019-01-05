@@ -87,20 +87,21 @@ export class PositionInTimeComponent implements AfterViewInit, OnInit {
   public handleMinuteChange(event){
     this.currentMinute = event.value;
     this.drawPitch();
-
+    
     this.positions.players.forEach(player => {
-        player.positions.forEach(position => {
-          var positionDate = new Date(position.date);
-          var initDate = new Date(this.initDate);
-          var isPositionInTimeFounded =
-           positionDate.getMinutes() == (initDate.getMinutes() + this.currentMinute) &&
-           positionDate.getSeconds() == (initDate.getSeconds() + this.currentSecond);
-  
-          if(isPositionInTimeFounded){
-            this.drawPlayer(position.x, position.y)
-          }
-        });
-    });
+      player.positions.forEach(position => {
+        var positionDate = new Date(position.date);
+        var startDate = new Date(this.positions.players[0].positions[0].date);
+        var isPositionInTimeFounded =
+         positionDate.getMinutes() == (startDate.getMinutes() + this.currentMinute) &&
+         positionDate.getSeconds() == (startDate.getSeconds() + this.currentSecond);
+
+        if(isPositionInTimeFounded){
+          this.drawPlayer(position.x, position.y)
+          return;
+        }
+      });
+  });
   }
 
   public handleSecondChange(event){
@@ -117,6 +118,7 @@ export class PositionInTimeComponent implements AfterViewInit, OnInit {
 
         if(isPositionInTimeFounded){
           this.drawPlayer(position.x, position.y)
+          return;
         }
       });
   });
