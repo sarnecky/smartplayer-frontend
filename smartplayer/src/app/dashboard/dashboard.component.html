@@ -17,7 +17,7 @@
         </div>
         <div class="card-body">
             <ul class="list-group list-group-flush" *ngFor='let player of players'>
-                <li class="list-group-item" (click)='onClick($event, player)'><a>{{player.firstName}} {{player.lastName}}</a></li>         
+                <li class="list-group-item" (click)='playerClick($event, player)'><a>{{player.firstName}} {{player.lastName}}</a></li>
               </ul>
           <button type="button" class="btn btn-lg btn-block btn-primary" (click)='addPlayer($event)'>Dodaj zawodnika</button>
         </div>

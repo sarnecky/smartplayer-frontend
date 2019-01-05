@@ -1,0 +1,33 @@
+
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <form>
+        
+          <div class="form-group input-top">
+            <label for="firstname">Imię</label>
+            <input readonly type="text" id="firstname" class="form-control" value="{{player.firstName}}" name="firstname">
+          </div>
+
+          <div class="form-group">
+            <label for="lastname">Nazwisko</label>
+            <input readonly type="text" id="lastname" class="form-control" value="{{player.lastName}}" name="lastname">
+          </div>
+
+          <div class="form-group">
+            <label for="growth">Wzrost</label>
+            <input readonly type="number" id="growth" class="form-control" value="{{player.growth}}" name="growth">
+          </div>
+
+          <div class="form-group">
+            <label for="weight">Waga</label>
+            <input readonly type="number" id="weight" class="form-control" value="{{player.weight}}" name="weight" >
+          </div>
+
+          <div class="form-group">
+            <label for="dateofbirth">Data urodzenia</label>
+            <input readonly type="text" id="dateofbirth" class="form-control" value="{{player.dateOfBirth.substring(0,10)}}" name="dateofbirth" >
+          </div>
+          
+        </form>
+    </div>
+</div>
