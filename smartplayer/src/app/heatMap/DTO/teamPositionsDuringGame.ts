@@ -1,3 +1,4 @@
+import DateTimeOffset from 'datetime-offset';
 export class TeamPositionsDuringGame
 {
     public players: PlayerWithPositions[];
@@ -14,5 +15,5 @@ export class Position
 {
     public x: number;
     public y: number;
-    public Date: Date;
+    public date: Date;
 }

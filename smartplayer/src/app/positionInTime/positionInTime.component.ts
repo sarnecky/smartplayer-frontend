@@ -8,7 +8,8 @@ import { Observable } from "rxjs/Observable";
 import { of } from "rxjs/observable/of";
 import { TeamPositionsDuringGame } from "../heatMap/DTO/teamPositionsDuringGame";
 import { Player } from "../heatMap/DTO/player";
-
+import {Http, Response} from "@angular/http";
+import 'rxjs/Rx';
 // declare window to remove typescript warning
 interface Window {
   Image: any;
@@ -28,17 +29,20 @@ export class PositionInTimeComponent implements AfterViewInit, OnInit {
   private canvas: HTMLCanvasElement;
   
   gameId: number;
-  minute: number;
-  second: number;
-  teamPositionsDuringGame: TeamPositionsDuringGame;
-  public players: Player[] = [];
+  currentMinute: number = 0;
+  currentSecond: number = 1;
+  public teamPositionsDuringGameObservable: Observable<TeamPositionsDuringGame>;
+  public playersObservable: Observable<Player[]>;
+  public positions: TeamPositionsDuringGame;
   width: number = 1050;
   height: number = 680;
+  initDate : Date;
 
   constructor(private router: Router,
-              private http: HttpClient,
+              private http: Http,
               private connection: Connection,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+            ) { }
 
   ngAfterViewInit(){
     this.canvas = this.pitchElement.nativeElement as HTMLCanvasElement
@@ -48,44 +52,74 @@ export class PositionInTimeComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.gameId = this.route.snapshot.params['gameId'];
-    this.http
-    .get<TeamPositionsDuringGame>(this.connection.apiURL + '/api/Game/positions/'+ this.gameId + '/' + this.width + '/' + this.height)
-    .subscribe(
-      data => {
-        this.teamPositionsDuringGame = data;
-      },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log('An error occurred:', err.error.message);
-        } else {
-          console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
-        }
-      });   
+    this.teamPositionsDuringGameObservable = this.getPositions();
+    this.teamPositionsDuringGameObservable.subscribe(data =>{
+      localStorage.setItem("positions", JSON.stringify(data))
+    })
 
-      this.http
-      .get<Player[]>(this.connection.apiURL + '/api/Player/listOfPlayersForGame/'+ this.gameId)
-      .subscribe(
-        data => {
-          this.players = data;
-        },
-        (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
-            console.log('An error occurred:', err.error.message);
-          } else {
-            console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
-          }
-        });
+    this.playersObservable = this.getPlayers();
+    this.teamPositionsDuringGameObservable.subscribe(data =>{
+      localStorage.setItem("players", JSON.stringify(data))
+    })
+
+
+    this.positions = JSON.parse(localStorage.getItem("positions"))as TeamPositionsDuringGame;
+    let initDate = this.positions.players[0].positions[0].date;
+    console.log(this.positions)
+  }
+
+  public getPositions(): Observable<TeamPositionsDuringGame>{
+    return this.http
+    .get(this.connection.apiURL + '/api/Game/positions/'+ this.gameId + '/' + this.width + '/' + this.height)
+    .map((response: Response) => {
+      return <TeamPositionsDuringGame>response.json();
+    })
+  }
+
+  public getPlayers(): Observable<Player[]>{
+    return this.http
+    .get(this.connection.apiURL + '/api/Player/listOfPlayersForGame/'+ this.gameId)
+    .map((response: Response) => {
+      return <Player[]>response.json();
+    })
   }
 
   public handleMinuteChange(event){
-    this.drawPitch()
-    
-    this.drawPlayer(200, event.value)
+    this.currentMinute = event.value;
+    this.drawPitch();
+
+    this.positions.players.forEach(player => {
+        player.positions.forEach(position => {
+          var positionDate = new Date(position.date);
+          var initDate = new Date(this.initDate);
+          var isPositionInTimeFounded =
+           positionDate.getMinutes() == (initDate.getMinutes() + this.currentMinute) &&
+           positionDate.getSeconds() == (initDate.getSeconds() + this.currentSecond);
+  
+          if(isPositionInTimeFounded){
+            this.drawPlayer(position.x, position.y)
+          }
+        });
+    });
   }
 
   public handleSecondChange(event){
+    this.currentSecond = event.value;
     this.drawPitch()
-    this.drawPlayer(200, event.value)
+
+    this.positions.players.forEach(player => {
+      player.positions.forEach(position => {
+        var positionDate = new Date(position.date);
+        var startDate = new Date(this.positions.players[0].positions[0].date);
+        var isPositionInTimeFounded =
+         positionDate.getMinutes() == (startDate.getMinutes() + this.currentMinute) &&
+         positionDate.getSeconds() == (startDate.getSeconds() + this.currentSecond);
+
+        if(isPositionInTimeFounded){
+          this.drawPlayer(position.x, position.y)
+        }
+      });
+  });
   }
 
   private drawPlayer(xPosition: number, yPosition: number){
