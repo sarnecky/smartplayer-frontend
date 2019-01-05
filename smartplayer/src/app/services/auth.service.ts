@@ -64,7 +64,7 @@ export class AuthService {
 
   public addPlayerToTeam(url: String, playerId: number): boolean {
     this.http
-      .post(this.constant.apiURL + url + '/playerId=' + playerId + '&teamId=' + Number(sessionStorage.getItem('teamId')), {
+      .post(this.constant.apiURL + url + '?playerId=' + String(playerId) + '&teamId=' + String(sessionStorage.getItem('teamId')), {
         playerId: playerId,
         teamId: Number(sessionStorage.getItem('teamId')),
       })
