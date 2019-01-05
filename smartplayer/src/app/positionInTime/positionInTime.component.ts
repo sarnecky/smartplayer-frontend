@@ -79,6 +79,7 @@ export class PositionInTimeComponent implements AfterViewInit, OnInit {
 
   public handleMinuteChange(event){
     this.drawPitch()
+    
     this.drawPlayer(200, event.value)
   }
 
