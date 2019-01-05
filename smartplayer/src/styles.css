@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background: #1a3c33 !important;
+  color: #ffffff !important;
+}
+
 .logo {
   width: 114px;
   height: 25px;
@@ -6,4 +11,101 @@
 
 a {
   cursor: pointer;
+}
+
+.card {
+  border: none;
+}
+
+.card-body {
+  background: #0b4c45;
+}
+
+.card-header {
+  background: #0b4c45e6;
+  color: #ffffff;
+}
+
+site-header {
+  color: #ffffff;
+}
+
+.bg-card-green {
+  background: #0b4c45 !important;
+}
+
+.hello-user {
+  margin: 0 1px;
+}
+
+.list-group-item {
+  background: none !important;
+  border: none !important;
+  color: #ffffff;
+}
+
+.btn-primary {
+  background: #39d52d !important;
+  border: none !important;
+}
+
+.btn-primary:hover {
+  background: #269b1d !important;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  color: #ffffff !important;
+  background: #0b4c45e6 !important;
+  border: none !important;
+}
+
+#field-bg {
+  background: url("/assets/images/field.png") no-repeat center;
+  margin: 0 auto;
+  position: relative;
+  width: 611px;
+  height: 400px;
+  top: 0;
+}
+
+#addField {
+  width: 100%;
+}
+
+#lu {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 260px;
+}
+
+#ld {
+  position: absolute;
+  bottom: 7px;
+  left: 5px;
+  width: 260px;
+}
+
+#ru {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 260px;
+}
+
+#rd {
+  position: absolute;
+  bottom: 7px;
+  right: 5px;
+  width: 260px;
+}
+
+#add-field-button {
+  width: auto;
+  margin: 20px auto;
+}
+
+.center {
+  text-align: center;
+  margin: 10px 0;
 }

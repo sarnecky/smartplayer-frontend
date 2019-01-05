@@ -1,0 +1,44 @@
+<form id="addField" (ngSubmit)="onSubmit()" #addFieldForm="ngForm">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <div class="form-group input-top">
+        <label for="name">Nazwa</label>
+        <input type="text" id="name" class="form-control" required [(ngModel)]="model.Name" name="name" #name="ngModel">
+        <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
+          Pole wymagane
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Adres</label>
+        <input type="text" id="address" class="form-control" required [(ngModel)]="model.Address" name="address" #address="ngModel">
+        <div [hidden]="address.valid || address.untouched" class="alert alert-danger">
+          Pole wymagane
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="field-bg">
+    <div id="lu">
+      <input class="form-control" type="text" required [(ngModel)]="model.LuLatValue" id="luLatValue" name="Szerokość geogr." placeholder="Szer. geogr.">
+      <input class="form-control" type="text" required [(ngModel)]="model.LuLongValue" id="luLongValue" name="Długość geogr." placeholder="Dł. geogr.">
+    </div>
+    <div id="ld">
+      <input class="form-control" type="text" required [(ngModel)]="model.LdLatValue" id="ldLatValue" name="Szerokość geogr." placeholder="Szer. geogr.">
+      <input class="form-control" type="text" required [(ngModel)]="model.LdLongValue" name="Długość geogr." placeholder="Dł. geogr.">
+    </div>
+    <div id="ru">
+      <input class="form-control" type="text" required [(ngModel)]="model.RuLatValue" id="ruLatValue" name="Szerokość geogr." placeholder="Szer. geogr.">
+      <input class="form-control" type="text" required [(ngModel)]="model.RuLongValue" id="ruLongValue" name="Długość geogr." placeholder="Dł. geogr.">
+    </div>
+    <div id="rd">
+      <input class="form-control" type="text" required [(ngModel)]="model.RdLatValue" id="rdLatValue" name="Szerokość geogr." placeholder="Szer. geogr.">
+      <input class="form-control" type="text" required [(ngModel)]="model.RdLongValue" name="Długość geogr." placeholder="Dł. geogr.">
+    </div>
+  </div>
+
+  <button id="add-field-button" class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!addFieldForm.form.valid">Dodaj</button>
+
+</form>
+
