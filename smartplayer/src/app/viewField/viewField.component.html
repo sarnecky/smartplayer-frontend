@@ -1,0 +1,36 @@
+<form id="addField">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <div class="form-group input-top">
+        <label for="name">Nazwa</label>
+        <input readonly type="text" id="name" class="form-control" value="{{field.name}}" name="name">
+      </div>
+
+      <div class="form-group">
+        <label for="address">Adres</label>
+        <input readonly type="text" id="address" class="form-control" value="{{field.address}}" name="address">
+      </div>
+    </div>
+  </div>
+
+  <div id="field-bg">
+    <div id="lu">
+      <input readonly class="form-control" type="text" id="luLatValue" value="{{field.fieldCoordinates['leftUp']['lat']}}" name="Szerokość geogr.">
+      <input readonly class="form-control" type="text" id="luLongValue" value="{{field.fieldCoordinates['leftUp']['lng']}}" name="Długość geogr.">
+    </div>
+    <div id="ld">
+      <input readonly class="form-control" type="text" id="ldLatValue" value="{{field.fieldCoordinates['leftDown']['lat']}}" name="Szerokość geogr.">
+      <input readonly class="form-control" type="text" value="{{field.fieldCoordinates['leftDown']['lng']}}" name="Długość geogr.">
+    </div>
+    <div id="ru">
+      <input readonly class="form-control" type="text" id="ruLatValue" value="{{field.fieldCoordinates['rightUp']['lat']}}" name="Szerokość geogr.">
+      <input readonly class="form-control" type="text" id="ruLongValue" value="{{field.fieldCoordinates['rightUp']['lng']}}" name="Długość geogr.">
+    </div>
+    <div id="rd">
+      <input readonly class="form-control" type="text" id="rdLatValue" value="{{field.fieldCoordinates['rightDown']['lat']}}" name="Szerokość geogr.">
+      <input readonly class="form-control" type="text" value="{{field.fieldCoordinates['rightDown']['lng']}}" name="Długość geogr.">
+    </div>
+  </div>
+
+</form>
+
