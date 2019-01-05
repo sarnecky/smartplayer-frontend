@@ -32,6 +32,7 @@ import { AddPlayerComponent } from "./addPlayer/addPlayer.component";
 import { AddFieldComponent } from "./addField/addField.component";
 ///import { BrowserModule } from '@angular/platform-browser';
 
+import {HttpModule} from "@angular/http";
 const appRoutes: Routes = [
   {
     path:'',
@@ -119,7 +120,8 @@ const appRoutes: Routes = [
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     RouterModule.forRoot(appRoutes, {useHash: true}),
-    SliderModule
+    SliderModule,
+    HttpModule
   ],
   providers: [
     Connection,
