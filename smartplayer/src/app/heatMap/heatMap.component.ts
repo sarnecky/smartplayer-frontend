@@ -73,16 +73,24 @@ export class HeatMapComponent implements AfterViewInit, OnInit {
 
   public onClick(event, player: Player) : void
   {
-    var positions = this.teamPositionsDuringGame.players.find(i=>i.playerId == player.id);
-    var data = [];
-    positions.positions.forEach(position => {
-      data.push({x: position.x+this.outsideLineXOffset, y: position.y+this.outsideLineYOffset, value: 1})
-    });
-    console.log(data);
-    this.heatmap.setData({
-      max: 5,
-      data: data
-    });
+      try {
+        var positions = this.teamPositionsDuringGame.players.find(i=>i.playerId == player.id);
+        var data = [];
+        positions.positions.forEach(position => {
+          data.push({x: position.x+this.outsideLineXOffset, y: position.y+this.outsideLineYOffset, value: 1})
+        });
+        console.log(data);
+        this.heatmap.setData({
+          max: 5,
+          data: data
+        });
+      } catch (error) {
+        this.heatmap.setData({
+          max: 5,
+          data: []
+        });
+      }
+
   }
 
 }
